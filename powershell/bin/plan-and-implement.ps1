@@ -4,6 +4,7 @@ param()
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+$PSNativeCommandUseErrorActionPreference = $false
 
 $ScriptName = if ([string]::IsNullOrEmpty($MyInvocation.InvocationName)) { $PSCommandPath } else { $MyInvocation.InvocationName }
 $WorkDir = $null

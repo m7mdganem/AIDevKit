@@ -219,6 +219,9 @@ Do not modify any other code and do not create branches; only create the definit
     }
 
     & copilot -p $DefPrompt @DefineFlags | Tee-Object -FilePath $DefinerOut
+    if ($LASTEXITCODE -ne 0) {
+        exit $LASTEXITCODE
+    }
 
     if (-not (Test-FileHasContent -Path $HandoffFile)) {
         Write-ErrorLine -Message '>>> Handoff file empty; extracting the last fenced block from the definer output ...'
