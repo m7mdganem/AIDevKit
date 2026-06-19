@@ -30,7 +30,8 @@ Two things are critical:
 ## Step 2 — Investigate to ground the discussion
 
 - Use **read-only** tools (view/grep/glob and similar) to learn how *this* repository
-  actually works: conventions (`AGENTS.md`, ADRs), the relevant existing code, the
+  actually works: conventions (`AGENTS.md`/`CLAUDE.md`/`.github/copilot-instructions.md`,
+  `CONTRIBUTING.md`, ADRs), the relevant existing code, the
   data model, layering, and constraints. Cite concrete files and symbols so the
   conversation stays concrete.
 - Never modify anything — you are exploring, not editing.

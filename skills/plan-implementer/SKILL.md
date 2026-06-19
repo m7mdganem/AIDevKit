@@ -65,6 +65,8 @@ These apply to **every** task and subagent. Put them in each subagent's prompt.
 - **Security & correctness** — validate inputs, enforce authorization/ownership
   server-side where applicable, handle errors and edge cases the plan lists, and
   never commit secrets or credentials.
+- **Respect git hooks** — if the project has pre-commit/commit-msg hooks, let them
+  run; fix what they flag rather than bypassing them with `--no-verify`.
 - **Tests** — meet the testing requirements in each task's acceptance criteria and
   follow the project's existing test conventions; run the suite as part of
   verification. Add tests the plan asks for — don't gold-plate beyond it.
@@ -74,7 +76,8 @@ Balance is the job: be principled and thorough, but resist over-engineering.
 ## Manual / human actions (out-of-band — never block on these)
 
 Some steps can only be performed by a human in an environment you cannot reach:
-setting secrets/env vars in a prod or staging dashboard (e.g. Vercel), DNS or
+setting secrets/env vars in a prod or staging dashboard (e.g. Vercel / AWS / GitHub
+Actions secrets, or your platform's equivalent), DNS or
 third-party console changes, rotating credentials, or one-off production
 migrations/backfills. The run is unattended, so you must **never stop and wait**
 for these. Instead:
@@ -88,7 +91,8 @@ for these. Instead:
 - **Keep the code safe without it.** Follow expand/contract: read new config
   through the project's env helper with a sensible fallback or behind a
   feature-flag so a not-yet-set value never crashes the app. Still ship everything
-  that *can* be done in code — `.env.example` entries, config templates, migration
+  that *can* be done in code — `.env.example` (or the project's env-template
+  equivalent) entries, config templates, migration
   files.
 - **Commit `MANUAL_ACTIONS.md`** as part of the wave that introduced the need.
 - **Summarize the outstanding actions** in your final report so the user sees them.
@@ -221,8 +225,9 @@ After the final push, **open a pull request** for the branch so the work is read
 for review — don't wait to be asked:
 
 - **Target the right base.** Open the PR against the branch you branched from —
-  normally the repository's default/protected branch (`main`/`master`). Never
-  target your own working branch.
+  the repository's default branch (detect it, e.g. `gh repo view --json
+  defaultBranchRef -q .defaultBranchRef.name`, since it may be `develop`/`trunk`,
+  not just `main`/`master`). Never target your own working branch.
 - **Use the project's tooling.** Prefer the GitHub CLI (`gh pr create`). If the
   remote isn't GitHub or `gh` is unavailable/unauthenticated, fall back to the
   host's PR mechanism (the compare URL printed by `git push`, or the platform's
@@ -239,6 +244,10 @@ for review — don't wait to be asked:
   (lint ✅ build ✅ tests ✅ + any plan-specific checks); any outstanding **manual
   actions** (point to `MANUAL_ACTIONS.md`); and **notes / follow-ups** (anything
   deferred, out-of-scope, or risky).
+- **Honor an existing PR template.** If the repo provides
+  `.github/PULL_REQUEST_TEMPLATE.md` (or an Issue/PR template dir), follow its
+  structure and required checkboxes instead of inventing your own, folding the
+  summary/verification/manual-actions content into its sections.
 
 A reliable way to create it with a multi-line body via the GitHub CLI:
 

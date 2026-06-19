@@ -68,7 +68,9 @@ schema columns, and acceptance criteria. Avoid vague verbs like "handle" or
 
 ## 2. Background & Context
 <Relevant existing architecture, conventions, and constraints. Cite concrete
-files, e.g. `lib/db/neon/folders.ts`, and project commands (build/lint/test).>
+files (e.g. `<module>/<file>` such as `src/services/users.ts`,
+`internal/store/users.go`, or `app/models/user.py`) and project commands
+(build/lint/test).>
 
 ## 3. Requirements (Specification)
 ### Functional
@@ -123,8 +125,8 @@ implementing agent knows what is safe to parallelize.>
   sequenced to avoid conflicts>.
 
 ## 9. Verification & Acceptance
-- Commands to run (use the project's real commands, e.g. `npm run lint`,
-  `npm run build`, tests if they exist).
+- Commands to run — the project's real commands (e.g. `npm run lint` / `make lint`,
+  `npm run build` / `cargo build`, and the test command if one exists).
 - Definition of done for the whole effort.
 - Manual/QA checks if relevant.
 
@@ -133,7 +135,8 @@ implementing agent knows what is safe to parallelize.>
 
 ## 11. Manual / Human Actions Required (out-of-band)
 > Anything a human must do in an environment the implementing agent cannot reach
-> — prod/staging dashboards, secret/env stores (e.g. Vercel), DNS, third-party
+> — prod/staging dashboards, secret/env stores (e.g. Vercel / AWS / GitHub Actions
+> secrets), DNS, third-party
 > consoles, or one-off prod migrations/backfills. The agent CANNOT perform these,
 > so they must be recorded explicitly, never silently assumed.
 - [ ] **[BEFORE DEPLOY] <action>** — Where: <environment/console> · What: <exact
@@ -204,7 +207,8 @@ EXECUTION INSTRUCTIONS:
 4. Follow this project's conventions (see AGENTS.md / custom instructions and the
    patterns cited in the plan).
 5. After each wave and at the end, run the verification commands:
-   <e.g., `npm run lint` and `npm run build`> and ensure they pass.
+   <the project's real verification commands, e.g. `npm run lint` and
+   `npm run build`, or `make check`, or `pytest`> and ensure they pass.
 6. The work is done when every task's acceptance criteria are met and the overall
    Definition of Done in the plan is satisfied.
 7. Record any action a human must take in an environment you cannot reach (prod

@@ -37,7 +37,8 @@ rarely need to guess or ask follow-ups.
    the heart of the definition; capture them faithfully, do not silently change
    them.
 3. Investigate the repo so the definition reflects how *this* project actually
-   works: read `AGENTS.md`/custom instructions, ADRs, and the relevant code, and
+   works: read `AGENTS.md`/`CLAUDE.md`/`.github/copilot-instructions.md`/custom
+   instructions, `CONTRIBUTING.md`, ADRs, and the relevant code, and
    note real file paths, layering, naming conventions, and the project's
    build/lint/test commands. Cite concrete files and symbols.
 4. If a **material** decision is still genuinely unresolved (one that changes scope
@@ -115,7 +116,8 @@ Rules for a good definition:
 - **Capture the agreed decisions verbatim** in section 4 — never quietly revise what
   the user already decided.
 - **Conventions-aware** — mirror the project's layering, naming, and commands you
-  observed (`AGENTS.md`, ADRs, existing patterns).
+  observed (`AGENTS.md`/`CLAUDE.md`/`.github/copilot-instructions.md`, ADRs,
+  existing patterns).
 - **Concrete over abstract** — real paths, real signatures, real commands.
 - **Backward compatibility** — for schema/API/data-model changes, prefer
   expand-then-contract and say so explicitly.
@@ -140,7 +142,8 @@ Plan and implement the feature defined in `<path/to/definition>.md`.
 That document is the complete, agreed feature definition — read it first and treat
 it as the source of truth for scope, decisions, design, and acceptance. Implement
 the entire feature end to end, following this repository's conventions (AGENTS.md /
-custom instructions, ADRs, and the existing layering and patterns), including every
+CLAUDE.md / .github/copilot-instructions.md / custom instructions, CONTRIBUTING, ADRs,
+and the existing layering and patterns), including every
 schema/migration, validation, type, data-access, hook, UI, and test change it
 specifies. Run the project's verification commands (lint, build, tests, type-check)
 and make them pass. Proceed autonomously; only stop for a genuine blocker or an
