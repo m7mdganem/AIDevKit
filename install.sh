@@ -24,6 +24,7 @@ GRN=$'\033[1;32m'; YEL=$'\033[1;33m'; RED=$'\033[1;31m'; DIM=$'\033[2m'; RST=$'\
 info()  { printf '%s%s%s\n' "$GRN" "$1" "$RST"; }
 warn()  { printf '%s%s%s\n' "$YEL" "$1" "$RST"; }
 note()  { printf '%s%s%s\n' "$DIM" "$1" "$RST"; }
+err()   { printf '%s%s%s\n' "$RED" "$1" "$RST" >&2; }
 
 # link <source> <target>
 link() {
@@ -95,5 +96,5 @@ uninstall_all() {
 case "${1:-}" in
   --uninstall|-u) uninstall_all ;;
   ""|--install|-i) install_all ;;
-  *) echo "Usage: $0 [--install | --uninstall]" >&2; exit 1 ;;
+  *) err "Usage: $0 [--install | --uninstall]"; exit 1 ;;
 esac
