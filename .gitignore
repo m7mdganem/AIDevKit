@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# Local environment overrides
+.env
+.env.local
+
+# Artifacts produced by the pipeline scripts (should live in the target repo, not here)
+IMPLEMENTATION_PLAN.md
+MANUAL_ACTIONS.md
