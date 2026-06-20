@@ -25,7 +25,6 @@
 #   DEFINE_MODEL=claude-opus-4.8            # model for writing the definition
 #   PLAN_IMPL_SCRIPT=plan-and-implement.sh  # path to the pipeline script (auto-located)
 #   NO_LAUNCH=1                             # stop after writing the definition
-#   AUTO_LAUNCH=1                           # skip the confirm prompt and launch immediately
 #
 set -euo pipefail
 
@@ -136,15 +135,6 @@ if [[ -n "${NO_LAUNCH:-}" ]]; then
   echo ">>> NO_LAUNCH set — stopping after the definition. The definition file is saved in the repo;" >&2
   echo "    pass the handoff prompt above to plan-and-implement.sh when you're ready." >&2
   exit 0
-fi
-
-if [[ -z "${AUTO_LAUNCH:-}" ]]; then
-  read -r -p ">>> Launch plan-and-implement now? [Y/n] " ans || true
-  if [[ "${ans:-}" =~ ^[Nn] ]]; then
-    echo ">>> Stopped before implementation. The definition is saved in the repo; re-run" >&2
-    echo "    plan-and-implement.sh with the handoff prompt above when ready." >&2
-    exit 0
-  fi
 fi
 
 echo ">>> [3/3] Handing off to plan-and-implement.sh ..." >&2

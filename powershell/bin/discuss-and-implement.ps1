@@ -247,15 +247,6 @@ Do not modify any other code and do not create branches; only create the definit
         exit 0
     }
 
-    if ([string]::IsNullOrEmpty((Get-OptionalEnvValue -Name 'AUTO_LAUNCH'))) {
-        $answer = Read-ConsoleLineWithPrompt -Prompt '>>> Launch plan-and-implement now? [Y/n] '
-        if ($answer -match '^[Nn]') {
-            Write-ErrorLine -Message '>>> Stopped before implementation. The definition is saved in the repo; re-run'
-            Write-ErrorLine -Message '    plan-and-implement.sh with the handoff prompt above when ready.'
-            exit 0
-        }
-    }
-
     Write-ErrorLine -Message '>>> [3/3] Handing off to plan-and-implement.ps1 ...'
     if (-not (Test-Path -LiteralPath $PlanImplScript -PathType Leaf)) {
         Write-ErrorLine -Message ('ERROR: plan-and-implement script not found at: {0}' -f $PlanImplScript)
